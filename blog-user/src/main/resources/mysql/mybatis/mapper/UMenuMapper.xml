@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayshuai.bloguser.dao.UMenuMapper">
+  <resultMap id="BaseResultMap" type="com.dayshuai.bloguser.dto.UMenu">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="mdf_time" jdbcType="TIMESTAMP" property="mdfTime" />
+    <result column="order_no" jdbcType="INTEGER" property="orderNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, menu_url, menu_name, perms, parent_id, create_time, mdf_time, order_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dayshuai.bloguser.dto.UMenu">
+    insert into u_menu (id, menu_url, menu_name, 
+      perms, parent_id, create_time, 
+      mdf_time, order_no)
+    values (#{id,jdbcType=BIGINT}, #{menuUrl,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{perms,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{mdfTime,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dayshuai.bloguser.dto.UMenu">
+    insert into u_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="perms != null">
+        perms,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="mdfTime != null">
+        mdf_time,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null">
+        #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mdfTime != null">
+        #{mdfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dayshuai.bloguser.dto.UMenu">
+    update u_menu
+    <set>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null">
+        perms = #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mdfTime != null">
+        mdf_time = #{mdfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dayshuai.bloguser.dto.UMenu">
+    update u_menu
+    set menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      perms = #{perms,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      mdf_time = #{mdfTime,jdbcType=TIMESTAMP},
+      order_no = #{orderNo,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
