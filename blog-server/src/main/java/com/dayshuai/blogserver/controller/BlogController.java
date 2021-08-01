@@ -42,12 +42,11 @@ public class BlogController {
         returnResult.put("data",blogService.queryBlogList(null));
 
 
+        System.out.println();
 
 
 
 
-
-        
 
         return returnResult;
     }
