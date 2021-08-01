@@ -40,6 +40,8 @@ public class BlogController {
     public HashMap<String, Object> getblogs () {
         HashMap<String, Object> returnResult = new HashMap<>();
         returnResult.put("data",blogService.queryBlogList(null));
+
+
         return returnResult;
     }
 
