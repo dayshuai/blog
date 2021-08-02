@@ -211,6 +211,7 @@
         <module>blog-manager</module>
         <module>framework</module>
         <module>blog-framework</module>
+        <module>blog-common</module>
     </modules>
     <packaging>pom</packaging>
 
