@@ -4,6 +4,7 @@ import com.dayshuai.blog.dto.BBlog;
 import com.dayshuai.blog.service.BlogService;
 import com.dayshuai.bloguser.dao.URoleMapper;
 import com.dayshuai.bloguser.service.UserService;
+import com.dayshuai.common.entity.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,27 +29,17 @@ public class BlogController {
 
 
     @ResponseBody
-    @PostMapping("/add")
-    public Object insert (BBlog blog) {
+    @PostMapping(value = "/add", produces = "application/json; charset=utf-8")
+    public AjaxResult insert (BBlog blog) {
         blogService.insertBlog(blog);
-        return new Object();
+        return AjaxResult.success();
     }
 
 
     @ResponseBody
     @PostMapping(value = "/getblogs")
-    public HashMap<String, Object> getblogs () {
-        HashMap<String, Object> returnResult = new HashMap<>();
-        returnResult.put("data",blogService.queryBlogList(null));
-
-
-        System.out.println();
-
-
-
-
-
-        return returnResult;
+    public AjaxResult getblogs () {
+        return AjaxResult.success(blogService.queryBlogList(null));
     }
 
 
