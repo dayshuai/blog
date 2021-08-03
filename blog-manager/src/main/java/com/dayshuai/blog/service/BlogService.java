@@ -9,9 +9,12 @@ public interface BlogService {
     BBlog getBlogById(long id);
 
 
-    void insertBlog(BBlog blog);
+    int insertBlog(BBlog blog);
 
 
     List<BBlog> queryBlogList(BBlog blog);
+
+    int deleteBlog(Long id);
+
 
 }

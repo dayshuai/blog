@@ -25,13 +25,18 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void insertBlog(BBlog blog) {
-        bBlogMapper.insertSelective(blog);
+    public int insertBlog(BBlog blog) {
+        return bBlogMapper.insertSelective(blog);
     }
 
     @Override
     public List<BBlog> queryBlogList(BBlog bBlog) {
         return bBlogMapper.selectBlogList(bBlog);
+    }
+
+    @Override
+    public int deleteBlog(Long id) {
+        return bBlogMapper.deleteByPrimaryKey(id);
     }
 
 
