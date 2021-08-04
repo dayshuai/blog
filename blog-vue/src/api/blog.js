@@ -16,8 +16,9 @@ export default {
   },
   getBlogHome(page, showCount) {
     return request({
-      url: '/blog/home/' + page + '/' + showCount,
-      method: 'get'
+      url: '/blog/blog/getBlogs',
+      method: 'get',
+      data:qs.stringify({'pageNum':page,'pageSize':showCount})
     })
   },
   getBlogById(id, isClick) {
