@@ -48,7 +48,7 @@ public class BlogController extends BaseController {
 
 
     @ResponseBody
-    @GetMapping(value = "/getBlog")
+    @PostMapping(value = "/getBlog")
     public AjaxResult getblog (Long id) {
         return AjaxResult.success(blogService.getBlogById(id));
     }

@@ -2,10 +2,10 @@
   <div id="indexBlogList" v-loading="loading">
     <div>
       <blogOverView v-for="blog in blogList" :key="blog.id" :id="blog.id" :title="blog.title"
-                    :body="blog.body" :time="getTime(blog.time)"
-                    :blogViews="blog.blogViews"
-                    :discussCount="blog.discussCount" :tags="catchTagName(blog.tags)"
-                    :name="blog.user.name"/>
+                    :body="blog.content" :time="getTime(blog.createTime)"
+                    :blogViews="blog.content"
+                    :discussCount="blog.content" :tags="catchTagName(blog.content)"
+                    :name="blog.content"/>
     </div>
 
     <div v-if="loading" style="margin: 35% 0">
@@ -67,8 +67,8 @@
       },
       loadBlog() { //加载数据
         blog.getBlogHome(this.currentPage, this.pageSize).then(responese => {
-          this.total = responese.data.total;
-          this.blogList = responese.data.rows;
+          this.total = responese.total;
+          this.blogList = responese.rows;
 
           this.loading = false;
         });

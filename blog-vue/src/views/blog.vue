@@ -199,14 +199,15 @@
         }
 
         blog.getBlogById(this.blogId, isClick).then(res => {
+            debugger;
             this.title = res.data.title;
-            this.body = res.data.body;
-            this.discussCount = res.data.discussCount;
-            this.blogViews = res.data.blogViews;
-            this.time = res.data.time;
-            this.userName = res.data.user.name;
-            this.tags = res.data.tags;
-            this.userReward = res.data.user.reward;
+            this.body = res.data.content;
+            this.discussCount = res.data.content;
+            this.blogViews = res.data.content;
+            this.time = res.data.createTime;
+            this.userName = res.data.content;
+            this.tags = res.data.content;
+            this.userReward = res.data.content;
 
             //设置cookies
             // 是否存在history此key

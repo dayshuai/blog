@@ -17,14 +17,15 @@ export default {
   getBlogHome(page, showCount) {
     return request({
       url: '/blog/blog/getBlogs',
-      method: 'get',
+      method: 'post',
       data:qs.stringify({'pageNum':page,'pageSize':showCount})
     })
   },
   getBlogById(id, isClick) {
     return request({
-      url: '/blog/' + id + '/' + isClick,
-      method: 'get'
+      url: '/blog/blog/getBlog',
+      method: 'post',
+      data:qs.stringify({'id':id})
     })
   },
   getMyBlog(page, showCount) {
