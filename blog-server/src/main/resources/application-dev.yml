@@ -9,9 +9,9 @@ spring:
           driver-class-name: com.mysql.jdbc.Driver
           #基本属性
           ##url: jdbc:mysql://cn-zz-bgp-4.sakurafrp.com:12058/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
-          url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://23.105.211.24:5002/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
           username: root
-          password: root
+          password: hs(28621)
           #配置初始化大小/最小/最大
           initial-size: 1
           min-idle: 1

@@ -15,6 +15,10 @@ public class BBlog {
 
     private Long likesNum;
 
+    private Integer blogDiscusscount;
+
+    private Integer blogBlogviews;
+
     private String content;
 
     public Long getId() {
@@ -63,6 +67,22 @@ public class BBlog {
 
     public void setLikesNum(Long likesNum) {
         this.likesNum = likesNum;
+    }
+
+    public Integer getBlogDiscusscount() {
+        return blogDiscusscount;
+    }
+
+    public void setBlogDiscusscount(Integer blogDiscusscount) {
+        this.blogDiscusscount = blogDiscusscount;
+    }
+
+    public Integer getBlogBlogviews() {
+        return blogBlogviews;
+    }
+
+    public void setBlogBlogviews(Integer blogBlogviews) {
+        this.blogBlogviews = blogBlogviews;
     }
 
     public String getContent() {

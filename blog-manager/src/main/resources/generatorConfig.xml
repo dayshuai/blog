@@ -71,8 +71,7 @@
                              type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <table schema="" tableName="tag" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"/>
-
+        <table schema="" tableName="b_blog" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"/>
 
     </context>
 </generatorConfiguration>
