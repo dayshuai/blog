@@ -3,8 +3,8 @@
     <div>
       <blogOverView v-for="blog in blogList" :key="blog.id" :id="blog.id" :title="blog.title"
                     :body="blog.content" :time="getTime(blog.createTime)"
-                    :blogViews="blog.content"
-                    :discussCount="blog.content" :tags="catchTagName(blog.content)"
+                    :blogViews="blog.blogBlogviews"
+                    :discussCount="blog.blogDiscusscount" :tags="catchTagName(blog.tags)"
                     :name="blog.content"/>
     </div>
 
@@ -50,6 +50,7 @@
     },
     methods: {
       getTime(time) {//将时间戳转化为几分钟前，几小时前
+        debugger;
         return date.timeago(time);
       },
       catchTagName(tag) { //从tag对象数组中拿到tag.Name属性

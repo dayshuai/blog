@@ -2,6 +2,8 @@ package com.dayshuai.blog.dao;
 
 import com.dayshuai.blog.dto.Tag;
 
+import java.util.List;
+
 public interface TagMapper {
     int deleteByPrimaryKey(Integer tagId);
 
@@ -14,4 +16,6 @@ public interface TagMapper {
     int updateByPrimaryKeySelective(Tag record);
 
     int updateByPrimaryKey(Tag record);
+
+    List<Tag> findTagByBlogId(Long id);
 }

@@ -1,7 +1,9 @@
 package com.dayshuai.blog.service.impl;
 
 import com.dayshuai.blog.dao.BBlogMapper;
+import com.dayshuai.blog.dao.TagMapper;
 import com.dayshuai.blog.dto.BBlog;
+import com.dayshuai.blog.dto.Tag;
 import com.dayshuai.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,11 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     BBlogMapper bBlogMapper;
+
+    @Autowired
+    TagMapper tagMapper;
+
+
     @Override
     public BBlog getBlogById(long id) {
         return bBlogMapper.selectByPrimaryKey(id);
@@ -31,7 +38,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<BBlog> queryBlogList(BBlog bBlog) {
-        return bBlogMapper.selectBlogList(bBlog);
+        List<BBlog> blogList = bBlogMapper.selectBlogList(bBlog);
+        blogList.stream().forEach(x->x.setTags(tagMapper.findTagByBlogId(x.getId())));
+        return blogList;
     }
 
     @Override

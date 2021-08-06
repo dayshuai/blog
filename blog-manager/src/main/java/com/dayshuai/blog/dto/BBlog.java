@@ -1,6 +1,7 @@
 package com.dayshuai.blog.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class BBlog {
     private Long id;
@@ -19,6 +20,8 @@ public class BBlog {
 
     private Integer blogBlogviews;
 
+
+
     private String content;
 
     public Long getId() {
@@ -31,6 +34,16 @@ public class BBlog {
 
     public String getTitle() {
         return title;
+    }
+
+    private List<Tag> tags;
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public void setTitle(String title) {

@@ -25,6 +25,14 @@
     values (#{tagId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
       )
   </insert>
+
+
+  <select id="findTagByBlogId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT t.tag_id,t.tag_name
+        FROM blog_tag bt LEFT JOIN tag t on bt.tag_id = t.tag_id
+        WHERE blog_id = #{id}
+    </select>
+
   <insert id="insertSelective" parameterType="com.dayshuai.blog.dto.Tag">
     insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
