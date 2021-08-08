@@ -22,9 +22,9 @@
       <div>
         <p class="el-icon-mouse">选择一个以上标签</p>
         <el-checkbox-group v-model="checkboxGroup">
-          <el-checkbox v-for="tag in tags" :key="tag.id" :label="tag.id" border
+          <el-checkbox v-for="tag in tags" :key="tag.tagId" :label="tag.tagId" border
                        style="margin-top: 10px">
-            {{tag.name}}
+            {{tag.tagName}}
           </el-checkbox>
         </el-checkbox-group>
       </div>
@@ -68,8 +68,8 @@
         })
         blog.getBlogById(this.blogId,true).then(res => {
           this.title = res.data.title;
-          this.body = res.data.body;
-          this.checkboxGroup = res.data.tags.map(t => t.id) // 填充标签
+          this.body = res.data.content;
+          this.checkboxGroup = res.data.tags.map(t => t.tagId) // 填充标签
         });
 
       }

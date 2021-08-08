@@ -20,9 +20,9 @@
       <div>
         <p class="el-icon-mouse">选择一个以上标签</p>
         <el-checkbox-group v-model="checkboxGroup">
-          <el-checkbox v-for="tag in tags" :key="tag.id" :label="tag.id" border
+          <el-checkbox v-for="tag in tags" :key="tag.tagId" :label="tag.tagId" border
             style="margin-top: 10px">
-            {{tag.name}}
+            {{tag.tagName}}
           </el-checkbox>
         </el-checkbox-group>
       </div>
@@ -66,6 +66,7 @@
           });
           return;
         }
+        debugger;
         var tags = this.checkboxGroup;
         var tagStr = '';
         for (var i = 0; i < tags.length; i++) {
@@ -108,7 +109,8 @@
     },
     created() {
       tag.getTag().then(res => {
-        this.tags = res.data;
+        debugger;
+        this.tags = res.rows;
       })
 
     }

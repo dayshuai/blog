@@ -87,16 +87,7 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-annotations</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-models</artifactId>
-                    </exclusion>
-                </exclusions>
+
             </dependency>
 
             <!-- swagger2-UI-->
@@ -209,7 +200,6 @@
         <module>blog-user</module>
         <module>blog-server</module>
         <module>blog-manager</module>
-        <module>framework</module>
         <module>blog-framework</module>
         <module>blog-common</module>
     </modules>

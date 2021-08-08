@@ -9,7 +9,7 @@ public interface BlogService {
     BBlog getBlogById(long id);
 
 
-    int insertBlog(BBlog blog);
+    void insertBlog(BBlog blog, Integer[] tagIds);
 
 
     List<BBlog> queryBlogList(BBlog blog);
@@ -17,4 +17,6 @@ public interface BlogService {
     int deleteBlog(Long id);
 
 
+
+    void updateBlog(Long blogId, String title, String content, Integer[] tagIds);
 }

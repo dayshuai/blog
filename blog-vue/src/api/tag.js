@@ -4,7 +4,7 @@ import qs from 'qs';
 export default {
   getTag() {
     return request({
-      url: '/tag',
+      url: '/tag/allTags',
       method: 'get'
     })
   },

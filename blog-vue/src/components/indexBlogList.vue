@@ -54,10 +54,10 @@
         return date.timeago(time);
       },
       catchTagName(tag) { //从tag对象数组中拿到tag.Name属性
-
+    
         var tagNames = [];
         for (var i = 0; i < tag.length; i++) {
-          tagNames.push(tag[i].name)
+          tagNames.push(tag[i].tagName)
         }
         return tagNames;
       },

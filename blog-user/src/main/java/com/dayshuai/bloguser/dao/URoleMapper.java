@@ -14,4 +14,6 @@ public interface URoleMapper {
     int updateByPrimaryKeySelective(URole record);
 
     int updateByPrimaryKey(URole record);
+
+    URole selectByRoleType(String roleType);
 }

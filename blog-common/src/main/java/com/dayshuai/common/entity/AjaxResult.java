@@ -2,6 +2,8 @@ package com.dayshuai.common.entity;
 
 import com.dayshuai.common.constants.HttpStatus;
 import com.dayshuai.common.utils.StringUtils;
+import lombok.Data;
+import lombok.ToString;
 
 import java.util.HashMap;
 
@@ -10,6 +12,8 @@ import java.util.HashMap;
  * 
  * @author ruoyi
  */
+@Data
+@ToString
 public class AjaxResult extends HashMap<String, Object>
 {
     private static final long serialVersionUID = 1L;

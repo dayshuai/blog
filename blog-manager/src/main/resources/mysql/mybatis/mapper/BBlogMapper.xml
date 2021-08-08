@@ -51,7 +51,20 @@
       #{blogDiscusscount,jdbcType=INTEGER}, #{blogBlogviews,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dayshuai.blog.dto.BBlog">
+  <insert id="saveBlogTag">
+        INSERT INTO blog_tag (blog_id, tag_id)
+        VALUES (#{blogId},#{tagId})
+    </insert>
+
+  <insert id="deleteTagsById">
+      DELETE FROM blog_tag WHERE blog_id = #{blogId}
+  </insert>
+
+
+
+
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.dayshuai.blog.dto.BBlog">
+
     insert into b_blog
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -60,9 +73,7 @@
       <if test="title != null">
         title,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="mdfTime != null">
         mdf_time,
       </if>
@@ -89,9 +100,7 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+        sysdate(),
       <if test="mdfTime != null">
         #{mdfTime,jdbcType=TIMESTAMP},
       </if>

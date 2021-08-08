@@ -18,4 +18,6 @@ public interface TagMapper {
     int updateByPrimaryKey(Tag record);
 
     List<Tag> findTagByBlogId(Long id);
+
+    List<Tag> queryTagList(Tag tag);
 }

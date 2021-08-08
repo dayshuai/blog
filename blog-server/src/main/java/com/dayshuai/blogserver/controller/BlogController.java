@@ -7,6 +7,7 @@ import com.dayshuai.bloguser.service.UserService;
 import com.dayshuai.common.controller.BaseController;
 import com.dayshuai.common.entity.AjaxResult;
 import com.dayshuai.common.page.TableDataInfo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,18 @@ public class BlogController extends BaseController {
 
     @ResponseBody
     @PostMapping(value = "/add", produces = "application/json; charset=utf-8")
-    public AjaxResult insert (BBlog blog) {
-        blogService.insertBlog(blog);
+    public AjaxResult insert (BBlog blog, Integer[] tagIds) {
+
+        blogService.insertBlog(blog, tagIds);
         return AjaxResult.success();
+    }
+
+
+    @PutMapping("updateBlog/{blogId}")
+    public AjaxResult updateBlog(@PathVariable Long blogId, String title, String content, Integer[] tagIds) {
+            blogService.updateBlog(blogId, title, content, tagIds);
+            return AjaxResult.success();
+
     }
 
 

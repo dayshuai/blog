@@ -37,9 +37,9 @@ export default {
   sendBlog(blogTitle, blogBody, tagId) {  //发布博客
     // alert(qs.stringify({'blogTitle': blogTitle, 'blogBody': blogBody,'tagId':tagId}))
     return request({
-      url: '/blog',
+      url: '/blog/blog/add',
       method: 'post',
-      data: qs.stringify({'blogTitle': blogTitle, 'blogBody': blogBody, 'tagId': tagId})
+      data: qs.stringify({'title': blogTitle, 'content': blogBody, 'tagIds': tagId})
     })
   },
   uploadImg(formdata) {
@@ -52,9 +52,9 @@ export default {
   },
   editBlog(blogId, blogTitle, blogBody, tagId) {  //发布博客
     return request({
-      url: '/blog/' + blogId,
+      url: '/blog/blog/updateBlog/' + blogId,
       method: 'put',
-      data: qs.stringify({'blogTitle': blogTitle, 'blogBody': blogBody, 'tagId': tagId})
+      data: qs.stringify({'title': blogTitle, 'content': blogBody, 'tagIds': tagId})
     })
   },
   adminDeleteBlog(blogId) { //管理员删除博客

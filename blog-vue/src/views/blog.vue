@@ -164,7 +164,7 @@
       catchTagName(tag) { //从tag对象数组中拿到tag.Name属性
         var tagNames = [];
         for (var i = 0; i < tag.length; i++) {
-          tagNames.push(tag[i].name)
+          tagNames.push(tag[i].tagName)
         }
         return tagNames;
       },
@@ -202,11 +202,11 @@
             debugger;
             this.title = res.data.title;
             this.body = res.data.content;
-            this.discussCount = res.data.content;
-            this.blogViews = res.data.content;
+            this.discussCount = res.data.blogDiscusscount;
+            this.blogViews = res.data.blogBlogviews;
             this.time = res.data.createTime;
             this.userName = res.data.content;
-            this.tags = res.data.content;
+            this.tags = res.data.tags;
             this.userReward = res.data.content;
 
             //设置cookies

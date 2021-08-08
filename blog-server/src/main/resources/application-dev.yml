@@ -9,7 +9,8 @@ spring:
           driver-class-name: com.mysql.jdbc.Driver
           #基本属性
           ##url: jdbc:mysql://cn-zz-bgp-4.sakurafrp.com:12058/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
-          url: jdbc:mysql://23.105.211.24:5002/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+          ##url: jdbc:mysql://23.105.211.24:5002/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://192.168.1.11:32768/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
           username: root
           password: hs(28621)
           #配置初始化大小/最小/最大
@@ -29,6 +30,9 @@ spring:
           #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
           pool-prepared-statements: false
           max-pool-prepared-statement-per-connection-size: 20
+    jackson:
+      serialization:
+        write-dates-as-timestamps: true
 
 # 开发环境配置
 server:

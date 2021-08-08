@@ -3,6 +3,7 @@ package com.dayshuai.blogserver.controller;
 import com.dayshuai.bloguser.dao.URoleMapper;
 import com.dayshuai.bloguser.dto.UUser;
 import com.dayshuai.bloguser.service.UserService;
+import com.dayshuai.common.entity.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,12 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
-
+    @ResponseBody
+    @PostMapping("/register")
+    public AjaxResult register(UUser user, String mailCode, String inviteCode) {
+        userService.register(user, mailCode, inviteCode);
+        return AjaxResult.success();
+    }
 
 
 }

@@ -20,11 +20,11 @@ export default {
   },
   register(name, password, mail, mailCode, inviteCode) {
     return request({
-      url: '/user/register',
+      url: '/blog/user/register',
       method: 'post',
       // header: 'Content-Type:application/x-www-form-urlencoded',
       data: qs.stringify({
-        'name': name, 'password': password,
+        'userName': name, 'password': password,
         'mail': mail, 'mailCode': mailCode,
         'inviteCode': inviteCode
       })

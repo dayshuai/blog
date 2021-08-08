@@ -8,6 +8,8 @@ import com.dayshuai.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,12 +30,18 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public BBlog getBlogById(long id) {
-        return bBlogMapper.selectByPrimaryKey(id);
+        BBlog blog = bBlogMapper.selectByPrimaryKey(id);
+        blog.setTags(tagMapper.findTagByBlogId(blog.getId()));
+        return blog;
     }
 
     @Override
-    public int insertBlog(BBlog blog) {
-        return bBlogMapper.insertSelective(blog);
+    public void insertBlog(BBlog blog, Integer[] tagIds) {
+        bBlogMapper.insertSelective(blog);
+        Arrays.stream(tagIds).forEach(x-> {
+            bBlogMapper.saveBlogTag(blog.getId(), x);
+        });
+
     }
 
     @Override
@@ -48,5 +56,16 @@ public class BlogServiceImpl implements BlogService {
         return bBlogMapper.deleteByPrimaryKey(id);
     }
 
-
+    @Override
+    public void updateBlog(Long blogId, String title, String content, Integer[] tagIds) {
+        BBlog blog = bBlogMapper.selectByPrimaryKey(blogId);
+        blog.setTitle(title);
+        blog.setContent(content);
+        blog.setMdfTime(new Date());
+        bBlogMapper.updateByPrimaryKeyWithBLOBs(blog);
+        bBlogMapper.deleteTagsById(blogId);
+        for (int tagId : tagIds) {
+            bBlogMapper.saveBlogTag(blogId, tagId);
+        }
+    }
 }

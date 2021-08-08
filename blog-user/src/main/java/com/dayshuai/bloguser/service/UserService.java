@@ -11,4 +11,5 @@ import com.dayshuai.bloguser.dto.UUser;
 public interface UserService {
     UUser getUserById(long id);
 
+    void register(UUser user, String mailCode, String inviteCode);
 }

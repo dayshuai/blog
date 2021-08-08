@@ -26,6 +26,13 @@
       )
   </insert>
 
+  <select id="queryTagList" parameterType="com.dayshuai.blog.dto.Tag" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tag
+  </select>
+
+
 
   <select id="findTagByBlogId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT t.tag_id,t.tag_name

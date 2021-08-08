@@ -1,6 +1,7 @@
 package com.dayshuai.blog.dao;
 
 import com.dayshuai.blog.dto.BBlog;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface BBlogMapper {
     int updateByPrimaryKeyWithBLOBs(BBlog record);
 
     int updateByPrimaryKey(BBlog record);
+
+    int saveBlogTag(@Param("blogId")Long blogId, @Param("tagId")int tagId);
+
+    int deleteTagsById(Long blogId);
 }
