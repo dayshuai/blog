@@ -14,4 +14,6 @@ public interface UUserMapper {
     int updateByPrimaryKeySelective(UUser record);
 
     int updateByPrimaryKey(UUser record);
+
+    UUser findUserByName(String userName);
 }

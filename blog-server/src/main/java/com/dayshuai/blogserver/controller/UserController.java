@@ -5,8 +5,11 @@ import com.dayshuai.bloguser.dto.UUser;
 import com.dayshuai.bloguser.service.UserService;
 import com.dayshuai.common.entity.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @ClassName : UUserController
@@ -37,5 +40,10 @@ public class UserController {
         return AjaxResult.success();
     }
 
+
+    @PostMapping("/login")
+    public AjaxResult login(UUser user) {
+        return AjaxResult.success(userService.login(user));
+    }
 
 }

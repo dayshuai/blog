@@ -4,10 +4,10 @@ import qs from 'qs';
 export default {
   login(name, password) {
     return request({
-      url: '/user/login',
+      url: '/blog/user/login',
       method: 'post',
       // header: 'Content-Type:application/x-www-form-urlencoded',
-      data: qs.stringify({'name': name, 'password': password})
+      data: qs.stringify({'userName': name, 'password': password})
     })
   },
   sendMail(mail) {
