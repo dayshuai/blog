@@ -30,8 +30,9 @@ export default {
   },
   getMyBlog(page, showCount) {
     return request({
-      url: '/blog/myblog/' + page + '/' + showCount,
-      method: 'get'
+      url: '/blog/blog/myblog',
+      method: 'post',
+      data:qs.stringify({'pageNum':page,'pageSize':showCount})
     })
   },
   sendBlog(blogTitle, blogBody, tagId) {  //发布博客

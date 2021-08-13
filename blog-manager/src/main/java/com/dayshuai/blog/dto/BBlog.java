@@ -20,9 +20,18 @@ public class BBlog {
 
     private Integer blogBlogviews;
 
+    private String userName;
 
 
     private String content;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Long getId() {
         return id;

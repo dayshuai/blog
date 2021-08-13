@@ -25,4 +25,6 @@ public interface BBlogMapper {
     int saveBlogTag(@Param("blogId")Long blogId, @Param("tagId")int tagId);
 
     int deleteTagsById(Long blogId);
+
+    List<BBlog> queryBlobByUser(Long id);
 }

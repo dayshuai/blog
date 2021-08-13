@@ -10,6 +10,8 @@
     <result column="likes_num" jdbcType="BIGINT" property="likesNum" />
     <result column="blog_discussCount" jdbcType="INTEGER" property="blogDiscusscount" />
     <result column="blog_blogViews" jdbcType="INTEGER" property="blogBlogviews" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.dayshuai.blog.dto.BBlog">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -28,6 +30,16 @@
     <include refid="Blob_Column_List" />
     from b_blog
   </select>
+
+  <select id="queryBlobByUser" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select
+    blog.id, blog.title, blog.create_time, blog.mdf_time, blog.author_id, blog.likes_num, blog.blog_discussCount, blog.blog_blogViews
+    ,
+    blog.content, uuser.user_name
+    from b_blog blog left join u_user uuser on uuser.id = blog.author_id
+    where author_id = #{id,jdbcType=BIGINT}
+  </select>
+
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 

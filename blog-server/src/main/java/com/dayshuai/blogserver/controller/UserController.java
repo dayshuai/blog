@@ -40,7 +40,7 @@ public class UserController {
         return AjaxResult.success();
     }
 
-
+    @ResponseBody
     @PostMapping("/login")
     public AjaxResult login(UUser user) {
         return AjaxResult.success(userService.login(user));

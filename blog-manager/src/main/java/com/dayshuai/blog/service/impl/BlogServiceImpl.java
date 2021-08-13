@@ -5,9 +5,13 @@ import com.dayshuai.blog.dao.TagMapper;
 import com.dayshuai.blog.dto.BBlog;
 import com.dayshuai.blog.dto.Tag;
 import com.dayshuai.blog.service.BlogService;
+import com.dayshuai.bloguser.dao.UUserMapper;
+import com.dayshuai.bloguser.dto.UUser;
+import com.dayshuai.common.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +31,15 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     TagMapper tagMapper;
 
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    UUserMapper userMapper;
+
 
     @Override
     public BBlog getBlogById(long id) {
@@ -37,6 +50,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void insertBlog(BBlog blog, Integer[] tagIds) {
+
+        UUser user = userMapper.findUserByName(jwtTokenUtil.getUsernameFromRequest(request));
+        blog.setAuthorId(user.getId());
         bBlogMapper.insertSelective(blog);
         Arrays.stream(tagIds).forEach(x-> {
             bBlogMapper.saveBlogTag(blog.getId(), x);
@@ -47,7 +63,9 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<BBlog> queryBlogList(BBlog bBlog) {
         List<BBlog> blogList = bBlogMapper.selectBlogList(bBlog);
-        blogList.stream().forEach(x->x.setTags(tagMapper.findTagByBlogId(x.getId())));
+        blogList.stream().forEach(x-> {
+            x.setTags(tagMapper.findTagByBlogId(x.getId()));
+        });
         return blogList;
     }
 
@@ -67,5 +85,14 @@ public class BlogServiceImpl implements BlogService {
         for (int tagId : tagIds) {
             bBlogMapper.saveBlogTag(blogId, tagId);
         }
+    }
+
+    @Override
+    public List<BBlog> queryBlogByUser() {
+
+        UUser user = userMapper.findUserByName(jwtTokenUtil.getUsernameFromRequest(request));
+        List<BBlog> blogs = bBlogMapper.queryBlobByUser(user.getId());
+        blogs.stream().forEach(x->x.setTags(tagMapper.findTagByBlogId(x.getId())));
+        return blogs;
     }
 }

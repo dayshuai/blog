@@ -35,6 +35,22 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.dayshuai</groupId>
+            <artifactId>blog-common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dayshuai</groupId>
+            <artifactId>blog-user</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>

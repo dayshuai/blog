@@ -19,4 +19,6 @@ public interface BlogService {
 
 
     void updateBlog(Long blogId, String title, String content, Integer[] tagIds);
+
+    List<BBlog> queryBlogByUser();
 }

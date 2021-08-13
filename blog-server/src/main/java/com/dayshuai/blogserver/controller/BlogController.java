@@ -9,6 +9,7 @@ import com.dayshuai.common.entity.AjaxResult;
 import com.dayshuai.common.page.TableDataInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,6 +69,19 @@ public class BlogController extends BaseController {
     @DeleteMapping(value = "/deleteBlog")
     public AjaxResult deleteBlog (Long id) {
         return AjaxResult.success(blogService.deleteBlog(id));
+    }
+
+    /**
+     * 根据用户分页查询博文
+     *
+
+     * @return
+     */
+    @PostMapping("/myblog")
+    @ResponseBody
+    public TableDataInfo findBlogByUser() {
+        startPage();
+        return getDataTable(blogService.queryBlogByUser());
     }
 
 

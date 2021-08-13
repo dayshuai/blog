@@ -1,10 +1,10 @@
 <template>
   <div id="myBlogList">
     <div v-for="blog in blogList">
-      <blogOverView :id="blog.id" :title="blog.title" :body="blog.body" :time="getTime(blog.time)"
-                    :blogViews="blog.blogViews"
-                    :discussCount="blog.discussCount" :tags="catchTagName(blog.tags)"
-                    :name="blog.user.name"/>
+      <blogOverView :id="blog.id" :title="blog.title" :body="blog.content" :time="getTime(blog.createTime)"
+                    :blogViews="blog.blogBlogviews"
+                    :discussCount="blog.blogDiscusscount" :tags="catchTagName(blog.tags)"
+                    :name="blog.userName"/>
     </div>
 
     <el-card class="box-card" style="margin: 20% " v-if="blogList.length <= 0">
@@ -55,7 +55,7 @@
       catchTagName(tag) { //从tag对象数组中拿到tag.Name属性
         var tagNames = [];
         for (var i = 0; i < tag.length; i++) {
-          tagNames.push(tag[i].name)
+          tagNames.push(tag[i].tagName)
         }
         return tagNames;
       },
@@ -66,8 +66,8 @@
       },
       loadBlog() { //加载数据
         blog.getMyBlog(this.currentPage, this.pageSize).then(responese => {
-          this.total = responese.data.total;
-          this.blogList = responese.data.rows;
+          this.total = responese.total;
+          this.blogList = responese.rows;
         });
       }
     }

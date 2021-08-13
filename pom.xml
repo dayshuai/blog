@@ -160,38 +160,6 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
-            <!-- 核心模块-->
-            <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
-            </dependency>
-
-            <!-- 系统模块-->
-            <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
-            </dependency>
-
-            <!-- 通用工具-->
-            <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
-            </dependency>
-            <!-- actviti-->
-            <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-activiti</artifactId>
-                <version>${ruoyi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-workflow</artifactId>
-                <version>${ruoyi.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
