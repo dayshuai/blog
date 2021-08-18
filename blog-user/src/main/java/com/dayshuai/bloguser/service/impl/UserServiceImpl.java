@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -44,6 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private JwtConfig jwtConfig;
+
+    @Autowired
+    private HttpServletRequest request;
 
 
     @Override
@@ -113,6 +117,11 @@ public class UserServiceImpl implements UserService {
             authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         }
         return new org.springframework.security.core.userdetails.User(user.getUserName(), "***********", authorities);
+    }
+
+    @Override
+    public void logOut() {
+        String username = jwtTokenUtil.getUsernameFromRequest(request);
     }
 }
 

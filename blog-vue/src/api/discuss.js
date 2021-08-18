@@ -10,13 +10,14 @@ export default {
   },
   getDiscussByBlogId(blogId, page, showCount) {
     return request({
-      url: '/discuss/' + blogId + '/' + page + '/' + showCount,
-      method: 'get'
+      url: '/blog/discuss/getByBlog/' + blogId,
+      method: 'post',
+      data:qs.stringify({'pageNum':page,'pageSize':showCount})
     })
   },
   sendDiscuss(blogId, discussBody) {  //发送评论
     return request({
-      url: '/discuss/' + blogId,
+      url: '/blog/discuss/sendDiscuss/' + blogId,
       method: 'post',
       data: qs.stringify({'discussBody': discussBody})
     })
@@ -29,7 +30,7 @@ export default {
   },
   userDeleteDiscuss(discussId) { //用户删除评论
     return request({
-      url: '/discuss/' + discussId,
+      url: '/blog/discuss/' + discussId,
       method: 'delete'
     })
   },
@@ -41,7 +42,7 @@ export default {
   },
   userDeleteReply(replyId) { //用户删除回复
     return request({
-      url: '/reply/' + replyId,
+      url: '/blog/reply/' + replyId,
       method: 'delete'
     })
   },

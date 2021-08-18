@@ -4,7 +4,7 @@ import qs from 'qs';
 export default {
   sendReply(discussId, replyBody, rootId) {
     return request({
-      url: '/reply/' + discussId,
+      url: '/blog/reply/' + discussId,
       method: 'post',
       data: qs.stringify({'replyBody': replyBody, 'rootId': rootId})
     })

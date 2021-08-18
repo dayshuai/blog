@@ -24,19 +24,22 @@
   </sql>
 
   <select id="selectBlogList" parameterType="BBlog" resultMap="ResultMapWithBLOBs">
-    select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from b_blog
+
+    <include refid="selectBlogList" />
+
   </select>
 
-  <select id="queryBlobByUser" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+
+  <sql id="selectBlogList">
     select
     blog.id, blog.title, blog.create_time, blog.mdf_time, blog.author_id, blog.likes_num, blog.blog_discussCount, blog.blog_blogViews
     ,
     blog.content, uuser.user_name
     from b_blog blog left join u_user uuser on uuser.id = blog.author_id
+  </sql>
+
+  <select id="queryBlobByUser" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    <include refid="selectBlogList" />
     where author_id = #{id,jdbcType=BIGINT}
   </select>
 

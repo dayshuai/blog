@@ -2,18 +2,17 @@ package com.dayshuai.blogserver.controller;
 
 import com.dayshuai.blog.dto.BBlog;
 import com.dayshuai.blog.service.BlogService;
-import com.dayshuai.bloguser.dao.URoleMapper;
-import com.dayshuai.bloguser.service.UserService;
 import com.dayshuai.common.controller.BaseController;
 import com.dayshuai.common.entity.AjaxResult;
 import com.dayshuai.common.page.TableDataInfo;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
+import java.io.IOException;
 
 /**
  * @ClassName : BlogController
@@ -23,6 +22,7 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping(value = "/blog/blog")
+@Slf4j
 public class BlogController extends BaseController {
 
 
@@ -40,7 +40,7 @@ public class BlogController extends BaseController {
         return AjaxResult.success();
     }
 
-
+    @ResponseBody
     @PutMapping("updateBlog/{blogId}")
     public AjaxResult updateBlog(@PathVariable Long blogId, String title, String content, Integer[] tagIds) {
             blogService.updateBlog(blogId, title, content, tagIds);
@@ -66,9 +66,9 @@ public class BlogController extends BaseController {
 
 
     @ResponseBody
-    @DeleteMapping(value = "/deleteBlog")
-    public AjaxResult deleteBlog (Long id) {
-        return AjaxResult.success(blogService.deleteBlog(id));
+    @DeleteMapping(value = "/deleteBlog/{blogId}")
+    public AjaxResult deleteBlog (@PathVariable Long blogId) {
+        return AjaxResult.success(blogService.deleteBlog(blogId));
     }
 
     /**
@@ -82,6 +82,20 @@ public class BlogController extends BaseController {
     public TableDataInfo findBlogByUser() {
         startPage();
         return getDataTable(blogService.queryBlogByUser());
+    }
+
+    @ResponseBody
+    @PostMapping("/uploadImg")
+    public AjaxResult uploadImg(MultipartFile file) {
+
+        String url = null;
+        try {
+            url = blogService.saveImg(file);
+        } catch (IOException e) {
+            log.error("",e);
+            return AjaxResult.error();
+        }
+        return AjaxResult.success(url);
     }
 
 

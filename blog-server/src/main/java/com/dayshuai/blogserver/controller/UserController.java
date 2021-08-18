@@ -46,4 +46,13 @@ public class UserController {
         return AjaxResult.success(userService.login(user));
     }
 
+    @ResponseBody
+    @PostMapping("/logOut")
+    public AjaxResult loginOut(UUser user) {
+        userService.logOut();
+        return AjaxResult.success();
+    }
+
+
+
 }

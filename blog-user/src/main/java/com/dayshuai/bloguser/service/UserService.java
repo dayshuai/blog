@@ -20,4 +20,6 @@ public interface UserService {
     Map<String, Object> login(UUser user);
 
     UserDetails loadUserByUsername(String name) throws UsernameNotFoundException;
+
+    void logOut();
 }

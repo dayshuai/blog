@@ -54,11 +54,11 @@
         <!-- 评论部分 -->
         <div v-for="discuss in discussList" id="discussList">
           <p style="margin: -5px " @mouseenter="pEnter()" @mouseleave="pLeave()">
-            <el-button type="text">{{discuss.user.name}}&nbsp;&nbsp;:</el-button>
+            <el-button type="text">{{discuss.user.userName}}&nbsp;&nbsp;:</el-button>
             <span style="margin-left: 10px">{{discuss.body}}</span>
             <span style="color: #909399;margin-left: 50px" class="el-icon-time">{{getTime(discuss.time)}}</span>
             <el-button type="text" style="margin-left: 5%"
-                       v-if="(discuss.user.name==getStoreName()||(getStoreRoles().indexOf('ADMIN') > -1))&&replyFlag"
+                       v-if="(discuss.user.userName==getStoreName()||(getStoreRoles().indexOf('ADMIN') > -1))&&replyFlag"
                        @click="deleteDiscuss(discuss.id)">删除
             </el-button>
             <el-button type="text" style="margin-left: 1%" @click="sendReply(discuss.id,null)"
@@ -71,18 +71,18 @@
              v-for="reply in discuss.replyList" style="margin: -5px"
              @mouseenter="pEnter()" @mouseleave="pLeave()">
             <span style="margin-left: 5%" class="el-icon-arrow-right"></span>
-            <el-button type="text">{{reply.user.name}}&nbsp;&nbsp;:</el-button>
+            <el-button type="text">{{reply.user.userName}}&nbsp;&nbsp;:</el-button>
 
             <span v-if="reply.reply !== null">回复:</span>
             <el-button type="text" v-if="!(typeof(reply.reply) == 'undefined') && reply.reply !== null">
-              {{reply.reply.user.name}}
+              {{reply.reply.user.userName}}
             </el-button>
 
             <span style="margin-left: 10px">{{reply.body}}</span>
             <span style="color: #909399;margin-left: 50px" class="el-icon-time">{{getTime(reply.time)}}</span>
 
             <el-button type="text" style="margin-left: 5%"
-                       v-if="(reply.user.name==getStoreName()||(getStoreRoles().indexOf('ADMIN') > -1))&&replyFlag"
+                       v-if="(reply.user.userName==getStoreName()||(getStoreRoles().indexOf('ADMIN') > -1))&&replyFlag"
                        @click="deleteReply(reply.id)">删除
             </el-button>
             <el-button type="text" style="margin-left: 1%" @click="sendReply(discuss.id,reply.id)"
@@ -199,15 +199,15 @@
         }
 
         blog.getBlogById(this.blogId, isClick).then(res => {
-            debugger;
+            
             this.title = res.data.title;
             this.body = res.data.content;
             this.discussCount = res.data.blogDiscusscount;
             this.blogViews = res.data.blogBlogviews;
             this.time = res.data.createTime;
-            this.userName = res.data.content;
+            this.userName = res.data.userName;
             this.tags = res.data.tags;
-            this.userReward = res.data.content;
+            this.userReward = res.data.userName;
 
             //设置cookies
             // 是否存在history此key
@@ -228,8 +228,8 @@
         );
 
         discuss.getDiscussByBlogId(this.blogId, this.currentPage, this.pageSize).then(responese => {
-          this.total = responese.data.total;
-          this.discussList = responese.data.rows;
+          this.total = responese.total;
+          this.discussList = responese.rows;
         });
 
       },

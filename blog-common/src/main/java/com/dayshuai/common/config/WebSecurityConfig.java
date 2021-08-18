@@ -27,8 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/**").permitAll()
-                .antMatchers(HttpMethod.PUT).authenticated()
-                .antMatchers(HttpMethod.DELETE).authenticated()
+                .antMatchers(HttpMethod.PUT, "/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/**").permitAll();
 
         httpSecurity.headers().cacheControl();

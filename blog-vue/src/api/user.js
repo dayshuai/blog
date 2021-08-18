@@ -90,8 +90,8 @@ export default {
   },
   logout(){
     return request({
-      url: '/user/logout',
-      method: 'get',
+      url: '/blog/user/logOut',
+      method: 'post',
     })
   },
   getMailSendState(mail) {

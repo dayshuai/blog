@@ -66,7 +66,7 @@
           });
           return;
         }
-        debugger;
+      
         var tags = this.checkboxGroup;
         var tagStr = '';
         for (var i = 0; i < tags.length; i++) {
@@ -95,7 +95,8 @@
         formdata.append('file', $file);
         blog.uploadImg(formdata).then(res => {
           // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-          this.$refs.md.$img2Url(pos, res.data);
+          debugger;
+          this.$refs.md.$img2Url(pos, res.msg);
         })
       },
       $imgDel(pos) {
@@ -109,7 +110,6 @@
     },
     created() {
       tag.getTag().then(res => {
-        debugger;
         this.tags = res.rows;
       })
 

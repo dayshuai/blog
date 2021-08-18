@@ -64,9 +64,11 @@
       blogId() {
         //加载数据
         tag.getTag().then(res => {
-          this.tags = res.data;
+          
+          this.tags = res.rows;
         })
         blog.getBlogById(this.blogId,true).then(res => {
+        
           this.title = res.data.title;
           this.body = res.data.content;
           this.checkboxGroup = res.data.tags.map(t => t.tagId) // 填充标签
@@ -112,7 +114,7 @@
         formdata.append('file', $file);
         blog.uploadImg(formdata).then(res => {
           // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-          this.$refs.md.$img2Url(pos, res.data);
+          this.$refs.md.$img2Url(pos, res.msg);
         })
       },
       $imgDel(pos) {

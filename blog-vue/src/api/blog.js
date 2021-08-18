@@ -45,7 +45,7 @@ export default {
   },
   uploadImg(formdata) {
     return request({
-      url: '/blog/uploadImg',
+      url: '/blog/blog/uploadImg',
       method: 'post',
       data: formdata,
       headers: {'Content-Type': 'multipart/form-data'},
@@ -66,7 +66,7 @@ export default {
   },
   userDeleteBlog(blogId) { //普通用户删除博客
     return request({
-      url: '/blog/' + blogId,
+      url: '/blog/blog/deleteBlog/' + blogId,
       method: 'delete'
     })
   },
