@@ -7,7 +7,7 @@
     <hr />
     <div v-for="blog in hotBlog">
       <el-link type="info" style="margin: 5px 0" :underline="false"  @click="router(blog.id)">
-        《{{blog.title}}》&nbsp;浏览数:&nbsp;{{blog.blogViews}}
+        《{{blog.title}}》&nbsp;浏览数:&nbsp;{{blog.blogBlogviews}}
       </el-link>
     </div>
     <br/>
@@ -26,6 +26,7 @@
     },
     created() {
       blog.getHotBlog().then(responese => {
+        debugger;
         this.hotBlog = responese.data;
       });
     },

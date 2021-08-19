@@ -34,6 +34,17 @@ spring:
     jackson:
       serialization:
         write-dates-as-timestamps: true
+    redis:
+        host: 127.0.0.1
+        port: 16390
+        timeout: 1000
+        jedis:
+          pool:
+            max-active: 10
+            max-idle: 8
+            min-idle: 2
+            max-wait: 100
+        password: redis123
 
 # 开发环境配置
 server:
@@ -72,3 +83,7 @@ upload:
   layerCount: 2
   #文件夹内单位数
   folderSize: 16
+###站点介绍
+site:
+    introduction: "分享知识"
+  ###Redis

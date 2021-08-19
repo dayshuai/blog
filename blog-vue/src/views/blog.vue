@@ -193,9 +193,9 @@
         });
 
         if (this.isLogin()) {
-          userLike.isUserLike(this.blogId).then(res => {
-            this.like = res.data;
-          });
+          //userLike.isUserLike(this.blogId).then(res => {
+          //  this.like = res.data;
+          //});
         }
 
         blog.getBlogById(this.blogId, isClick).then(res => {

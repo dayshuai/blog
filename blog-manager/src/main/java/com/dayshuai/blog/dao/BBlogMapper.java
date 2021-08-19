@@ -4,6 +4,7 @@ import com.dayshuai.blog.dto.BBlog;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BBlogMapper {
     int deleteByPrimaryKey(Long id);
@@ -27,4 +28,8 @@ public interface BBlogMapper {
     int deleteTagsById(Long blogId);
 
     List<BBlog> queryBlobByUser(Long id);
+
+    List<BBlog> findHotBlog(int i);
+
+    int getBlogLikeCountByBlogId(Integer blogId);
 }

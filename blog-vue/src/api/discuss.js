@@ -4,7 +4,7 @@ import qs from 'qs';
 export default {
   getNewDiscuss() {
     return request({
-      url: '/discuss/newDiscuss',
+      url: '/blog/discuss/newDiscuss',
       method: 'get'
     })
   },

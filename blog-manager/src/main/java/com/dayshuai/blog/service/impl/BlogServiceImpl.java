@@ -7,20 +7,21 @@ import com.dayshuai.blog.service.BlogService;
 import com.dayshuai.bloguser.dao.UUserMapper;
 import com.dayshuai.bloguser.dto.UUser;
 import com.dayshuai.common.config.ImgUploadConfig;
+import com.dayshuai.common.config.RedisConfig;
 import com.dayshuai.common.utils.FileUtil;
 import com.dayshuai.common.utils.FormatUtil;
 import com.dayshuai.common.utils.JwtTokenUtil;
 import com.dayshuai.common.utils.UUIDUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @ClassName : BlogServiceImpl
@@ -58,7 +59,11 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private ImgUploadConfig imgUploadConfig;
 
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    ObjectMapper objectMapper;
 
 
     @Override
@@ -75,7 +80,7 @@ public class BlogServiceImpl implements BlogService {
         blog.setAuthorId(user.getId());
         blog.setUserName(user.getUserName());
         bBlogMapper.insertSelective(blog);
-        Arrays.stream(tagIds).forEach(x-> {
+        Arrays.stream(tagIds).forEach(x -> {
             bBlogMapper.saveBlogTag(blog.getId(), x);
         });
 
@@ -84,7 +89,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<BBlog> queryBlogList(BBlog bBlog) {
         List<BBlog> blogList = bBlogMapper.selectBlogList(bBlog);
-        blogList.stream().forEach(x-> {
+        blogList.stream().forEach(x -> {
             x.setTags(tagMapper.findTagByBlogId(x.getId()));
         });
         return blogList;
@@ -113,7 +118,7 @@ public class BlogServiceImpl implements BlogService {
 
         UUser user = userMapper.findUserByName(jwtTokenUtil.getUsernameFromRequest(request));
         List<BBlog> blogs = bBlogMapper.queryBlobByUser(user.getId());
-        blogs.stream().forEach(x->x.setTags(tagMapper.findTagByBlogId(x.getId())));
+        blogs.stream().forEach(x -> x.setTags(tagMapper.findTagByBlogId(x.getId())));
         return blogs;
     }
 
@@ -135,4 +140,56 @@ public class BlogServiceImpl implements BlogService {
         //将硬盘路径转换为url，返回
         return imgUploadConfig.getStaticAccessPath().replaceAll("\\*", "") + fileName;
     }
+
+    /**
+     * 查询热门博文
+     * 正常状态
+     *
+     * @return
+     */
+    @Override
+    public List<BBlog> findHotBlog() throws IOException {
+        // 查询redis 热门博客id set
+
+        if (redisTemplate.hasKey(RedisConfig.REDIS_HOT_BLOG)) {
+
+            // 有缓存
+            List<BBlog> blogList = new ArrayList<>(6);
+
+            List<String> blogIdList = redisTemplate.opsForList().range(RedisConfig.REDIS_HOT_BLOG, 0, RedisConfig.REDIS_HOT_BLOG_COUNT);
+
+            for (String blogId : blogIdList) {
+                //根据缓存获取 blog
+                String blogJson = redisTemplate.opsForValue().get(RedisConfig.REDIS_BLOG_PREFIX + blogId);
+                // 返回 缓存
+                BBlog blog = objectMapper.readValue(blogJson, BBlog.class);
+                blogList.add(blog);
+            }
+
+
+            return blogList;
+        } else {
+            // redis中没有缓存 查询 mysql
+            // 通过定时任务进行热门博客列表更新
+            return bBlogMapper.findHotBlog(6);
+        }
+
+
+    }
+
+    @Override
+    public int getBlogLikeCountByBlogId(Integer blogId) {
+        int likeCount;
+        String likeCountKey = String.valueOf(blogId);
+        //缓存不存在，查询数据库
+        if (!redisTemplate.opsForHash().hasKey(RedisConfig.MAP_BLOG_LIKE_COUNT_KEY, likeCountKey)) {
+            likeCount = bBlogMapper.getBlogLikeCountByBlogId(blogId);
+            redisTemplate.opsForHash().put(RedisConfig.MAP_BLOG_LIKE_COUNT_KEY, likeCountKey, String.valueOf(likeCount));
+        } else {
+            likeCount = Integer.parseInt((String) redisTemplate.opsForHash().get(RedisConfig.MAP_BLOG_LIKE_COUNT_KEY, likeCountKey));
+        }
+        return likeCount;
+    }
+
+
 }

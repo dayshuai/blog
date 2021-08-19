@@ -12,7 +12,7 @@ export default {
   },
   getBlogLikeCount(blogId) {
     return request({
-        url: '/blog/getBlogLikeCount'+ '/' + blogId,
+        url: '/blog/blog/getBlogLikeCount'+ '/' + blogId,
         method: 'get'
     })
   },

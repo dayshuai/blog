@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 
 public interface BlogService {
@@ -25,4 +26,9 @@ public interface BlogService {
     List<BBlog> queryBlogByUser();
 
     String saveImg(MultipartFile file) throws IOException;
+
+
+    List<BBlog> findHotBlog() throws IOException;
+
+    int getBlogLikeCountByBlogId(Integer blogId);
 }

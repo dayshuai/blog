@@ -48,7 +48,6 @@
     <select id="findNewDiscuss" parameterType="Integer" resultMap="Discuss">
         SELECT discuss_id,discuss_body,discuss_time,b.id blog_id ,u.id user_id,u.user_name,b.title
         FROM discuss d LEFT JOIN b_blog b on d.blog_id = b.id LEFT JOIN u_user u on d.user_id = u.id
-        WHERE b.blog_state = 1
         ORDER BY d.discuss_time DESC
         LIMIT 0, #{value}
     </select>
@@ -56,7 +55,7 @@
     <select id="findUserNewDiscuss" resultMap="Discuss">
         SELECT discuss_id,discuss_body,discuss_time,b.id blog_id ,u.id user_id,u.user_name
         FROM discuss d LEFT JOIN b_blog b on d.blog_id = b.id LEFT JOIN u_user u on d.user_id = u.id
-        WHERE b.user_id = #{userId} AND b.blog_state = 1
+        WHERE b.user_id = #{userId}
         ORDER BY d.discuss_time
         LIMIT 0 , #{count}
     </select>

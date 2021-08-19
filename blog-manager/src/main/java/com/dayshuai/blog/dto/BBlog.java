@@ -1,8 +1,12 @@
 package com.dayshuai.blog.dto;
 
+import lombok.Data;
+import lombok.ToString;
+
 import java.util.Date;
 import java.util.List;
-
+@Data
+@ToString(exclude = "body")
 public class BBlog {
     private Long id;
 

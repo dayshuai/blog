@@ -43,6 +43,33 @@
     where author_id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="findHotBlog" parameterType="Integer" resultMap="BaseResultMap">
+        SELECT
+            blog.id,
+            blog.title,
+            blog.create_time,
+            blog.mdf_time,
+            blog.author_id,
+            blog.likes_num,
+            blog.blog_discussCount,
+            blog.blog_blogViews,
+            u.user_name
+        FROM
+            b_blog blog
+            LEFT JOIN u_user u ON blog.author_id = u.id
+        ORDER BY
+            blog_blogViews DESC,
+            blog_discussCount DESC
+            LIMIT 0,#{value}
+    </select>
+
+    <select id="getBlogLikeCountByBlogId" parameterType="int" resultType="int">
+        SELECT likes_num FROM b_blog
+        WHERE id = #{blogId}
+    </select>
+
+
+
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 

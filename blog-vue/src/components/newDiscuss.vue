@@ -7,7 +7,7 @@
     <hr/>
     <div v-for="discuss in discussList">
       <el-link type="info" :underline="false" style="margin: 5px 0" @click="router(discuss.blog.id)">
-        {{discuss.user.name}}&nbsp;:&nbsp;{{discuss.body}}《{{discuss.blog.title}}》
+        {{discuss.user.userName}}&nbsp;:&nbsp;{{discuss.body}}《{{discuss.blog.title}}》
       </el-link>
     </div>
     <br/>

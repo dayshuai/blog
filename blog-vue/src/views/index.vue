@@ -9,7 +9,7 @@
           <introduction/>
           <newDiscuss/>
           <hotBlog/>
-          <statisticalBlog/>
+          
         </div>
       </el-aside>
     </el-container>

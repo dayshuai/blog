@@ -22,7 +22,8 @@
     },
     created() {
       site.getSite().then(responese => {
-        this.introduction = responese.data;
+        debugger;
+        this.introduction = responese.msg;
       });
     }
 

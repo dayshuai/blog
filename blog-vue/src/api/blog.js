@@ -4,7 +4,7 @@ import qs from 'qs';
 export default {
   getHotBlog() {
     return request({
-      url: '/blog/hotBlog',
+      url: '/blog/blog/hotBlog',
       method: 'get'
     })
   },
