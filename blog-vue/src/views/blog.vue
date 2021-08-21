@@ -199,7 +199,7 @@
         }
 
         blog.getBlogById(this.blogId, isClick).then(res => {
-            
+           debugger; 
             this.title = res.data.title;
             this.body = res.data.content;
             this.discussCount = res.data.blogDiscusscount;

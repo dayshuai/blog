@@ -12,6 +12,7 @@ import com.dayshuai.common.utils.FileUtil;
 import com.dayshuai.common.utils.FormatUtil;
 import com.dayshuai.common.utils.JwtTokenUtil;
 import com.dayshuai.common.utils.UUIDUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -69,6 +70,8 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BBlog getBlogById(long id) {
         BBlog blog = bBlogMapper.selectByPrimaryKey(id);
+        UUser user = userMapper.selectByPrimaryKey(blog.getAuthorId());
+        blog.setUserName(user.getUserName());
         blog.setTags(tagMapper.findTagByBlogId(blog.getId()));
         return blog;
     }
@@ -88,12 +91,22 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<BBlog> queryBlogList(BBlog bBlog) {
+
+
+
         List<BBlog> blogList = bBlogMapper.selectBlogList(bBlog);
         blogList.stream().forEach(x -> {
             x.setTags(tagMapper.findTagByBlogId(x.getId()));
+            String body = x.getContent();
+            if (body.length() > MAX_BODY_CHAR_COUNT) {
+                x.setContent(body.substring(0, MAX_BODY_CHAR_COUNT));
+            }
         });
+
         return blogList;
     }
+
+    private static final int MAX_BODY_CHAR_COUNT = 150;
 
     @Override
     public int deleteBlog(Long id) {

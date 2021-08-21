@@ -1,0 +1,89 @@
+spring:
+    datasource:
+        name: blog
+        type: com.alibaba.druid.pool.DruidDataSource
+        #druid相关配置
+        druid:
+          #监控统计拦截的filters
+          filters: stat
+          driver-class-name: com.mysql.jdbc.Driver
+          #基本属性
+          url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+          ##url: jdbc:mysql://23.105.211.24:5002/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+          ##url: jdbc:mysql://192.168.1.11:32768/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: root
+          ##password: hs(28621)
+          #配置初始化大小/最小/最大
+          initial-size: 1
+          min-idle: 1
+          max-active: 20
+          #获取连接等待超时时间
+          max-wait: 60000
+          #间隔多久进行一次检测，检测需要关闭的空闲连接
+          time-between-eviction-runs-millis: 60000
+          #一个连接在池中最小生存的时间
+          min-evictable-idle-time-millis: 300000
+          validation-query: SELECT 'x'
+          test-while-idle: true
+          test-on-borrow: false
+          test-on-return: false
+          #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+          pool-prepared-statements: false
+          max-pool-prepared-statement-per-connection-size: 20
+    jackson:
+      serialization:
+        write-dates-as-timestamps: true
+    redis:
+        host: 127.0.0.1
+        port: 16390
+        timeout: 1000
+        jedis:
+          pool:
+            max-active: 10
+            max-idle: 8
+            min-idle: 2
+            max-wait: 100
+        password: redis123
+
+# 开发环境配置
+server:
+    # 服务器的HTTP端口，默认为8080
+    port: 8080
+
+    tomcat:
+            # tomcat的URI编码
+            uri-encoding: UTF-8
+            # tomcat最大线程数，默认为200
+            max-threads: 800
+            # Tomcat启动初始化的线程数，默认值25
+            min-spare-threads: 30
+logging:
+  level:
+    root: info
+  file:
+    path: e:/springboot-blog
+    ### jwt
+jwt:
+  ###过期时间 s数432000 5天
+  time: 432000
+  ###安全密钥
+  secret: "BlogSecret"
+  ###token前缀
+  prefix: "Bearer "
+  ###http头key
+  header: "Authorization"
+
+upload:
+  #静态资源对外暴露的访问路径 一个* 代表只匹配该路径下的一级子路径
+  staticAccessPath: /img/*
+  #文件上传目录
+  uploadFolder: E:/blog
+  #文件夹层数
+  layerCount: 2
+  #文件夹内单位数
+  folderSize: 16
+###站点介绍
+site:
+    introduction: "分享知识"
+  ###Redis

@@ -10,7 +10,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {// 在这里配置如下代码 此配置只在npm run dev 下生效
       '/api': {
-        target: 'http://127.0.0.1:8080/', //
+        target: 'http://127.0.0.1:8081/', //
         changeOrigin: true, //
         pathRewrite: {
           // 路径重写，
@@ -18,7 +18,7 @@ module.exports = {
         }
       },
       '/img': {     //图片资源默认以8001端口发起请求
-        target: 'http://127.0.0.1:8080/', //
+        target: 'http://127.0.0.1:8081/', //
         changeOrigin: true, //
         pathRewrite: {
           // 路径重写，

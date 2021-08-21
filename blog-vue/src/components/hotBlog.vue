@@ -26,7 +26,6 @@
     },
     created() {
       blog.getHotBlog().then(responese => {
-        debugger;
         this.hotBlog = responese.data;
       });
     },

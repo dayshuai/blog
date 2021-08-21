@@ -23,7 +23,7 @@ public interface BBlogMapper {
 
     int updateByPrimaryKey(BBlog record);
 
-    int saveBlogTag(@Param("blogId")Long blogId, @Param("tagId")int tagId);
+    int saveBlogTag(@Param("blogId") Long blogId, @Param("tagId") int tagId);
 
     int deleteTagsById(Long blogId);
 
@@ -32,4 +32,5 @@ public interface BBlogMapper {
     List<BBlog> findHotBlog(int i);
 
     int getBlogLikeCountByBlogId(Integer blogId);
+
 }

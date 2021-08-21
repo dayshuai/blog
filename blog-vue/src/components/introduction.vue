@@ -22,8 +22,7 @@
     },
     created() {
       site.getSite().then(responese => {
-        debugger;
-        this.introduction = responese.msg;
+          this.introduction = responese.msg;
       });
     }
 

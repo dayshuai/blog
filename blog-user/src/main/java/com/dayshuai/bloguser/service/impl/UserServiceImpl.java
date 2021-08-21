@@ -12,6 +12,7 @@ import com.dayshuai.common.enums.RoleType;
 import com.dayshuai.common.utils.JwtTokenUtil;
 import com.dayshuai.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,6 +49,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
 
     @Override
@@ -93,10 +97,10 @@ public class UserServiceImpl implements UserService {
         map.put("name", user.getUserName());
         map.put("roles", roles);
 
-        /*//将token存入redis 过期时间 jwtConfig.time 单位[s]
+        //将token存入redis 过期时间 jwtConfig.time 单位[s]
         redisTemplate.opsForValue().
-                set(JwtConfig.REDIS_TOKEN_KEY_PREFIX + user.getName(), jwtConfig.getPrefix() + token, jwtConfig.getTime(), TimeUnit.SECONDS);
-        */
+                set(JwtConfig.REDIS_TOKEN_KEY_PREFIX + user.getUserName(), jwtConfig.getPrefix() + token, jwtConfig.getTime(), TimeUnit.SECONDS);
+
         return map;
     }
 

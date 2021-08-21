@@ -36,12 +36,17 @@
     ,
     blog.content, uuser.user_name
     from b_blog blog left join u_user uuser on uuser.id = blog.author_id
+    ORDER BY blog.create_time DESC
   </sql>
 
   <select id="queryBlobByUser" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <include refid="selectBlogList" />
     where author_id = #{id,jdbcType=BIGINT}
   </select>
+
+
+
+
 
   <select id="findHotBlog" parameterType="Integer" resultMap="BaseResultMap">
         SELECT
